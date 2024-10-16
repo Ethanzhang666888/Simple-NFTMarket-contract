@@ -38,10 +38,10 @@ contract NFTMarket {
         delete listings[tokenId];
     }
 
-    function tokensReceived(address from, uint256 value, uint256 tokenId) external {
+    function tokensReceived (address from, address to,uint256 value, bytes calldata data) external {
   
-     //   uint256 tokenId = abi.decode(data, (uint256));  // 解析数据
-        NFTListing memory listing = listings[tokenId]; // 获取NFT数据
+        uint256 tokenId = abi.decode(data, (uint256));     // 解析数据
+        NFTListing memory listing = listings[tokenId];    // 获取NFT数据
 
         require(listing.price > 0, "NFT not listed");
         require(value >= listing.price, "Insufficient tokens sent"); // 确保价格匹配
