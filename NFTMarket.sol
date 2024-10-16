@@ -39,7 +39,8 @@ contract NFTMarket {
     }
 
     function tokensReceived (address from, address to,uint256 value, bytes calldata data) external {
-  
+
+        require(msg.sender == address(token), "Invalid token address");// 验证发送方是否为代币合约地址
         uint256 tokenId = abi.decode(data, (uint256));     // 解析数据
         NFTListing memory listing = listings[tokenId];    // 获取NFT数据
 
